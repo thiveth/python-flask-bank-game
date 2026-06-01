@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+<head><title>Players</title></head>
+<body>
+    <h1>All Players</h1>
+    <ul>
+        {% for player in players %}
+        <li>{{ player[0] }} -- Balance: {{ player[1] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
