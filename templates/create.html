@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
-
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/static/create.css">
+    </head>
 <body>
-    <form method="POST" action="/create">
-        <input type="text" name="name" placeholder="Enter name">
-        <input type="number" name="balance" placeholder="Enter amount">
-        <button type = submit>Submit</button>
-    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="flash">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="container">
+        <h1>Create Player</h1>
+        <form method="POST" action="/create">
+            <input type="text" name="name" placeholder="Enter name" required>
+            <input type="number" name="balance" placeholder="Enter starting balance" required>
+            <button type="submit">Create</button>
+        </form>
+        <a href="/" class="button">Home</a>
+    </div>
 </body>
 </html>

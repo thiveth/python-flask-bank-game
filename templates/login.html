@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
-
+<head>
+    <link rel="stylesheet" href="/static/login.css">
+</head>
 <body>
-    <form method="POST" action="/login">
-        <input type="text" name="name" palceholder="Enter name">
-        <button type="submit">Login</button>
-    </form>
+    <div class="center">
+        <form method="POST" action="/login">
+            <input type="text" name="name" placeholder="Enter name">
+            <button type="submit">Login</button>
+        </form>
+        <a href="/" class="button">Home</a>
+        <a href="/players" class="button">View Players</a>
+    </div>
 </body>
 </html>

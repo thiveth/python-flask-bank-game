@@ -1,13 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
     <meta charset="UTF-8">
-<head><title>Players</title></head>
+<head><title>Players</title>
+    <link rel=stylesheet href="/static/players.css">
+</head>
 <body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    
     <h1>All Players</h1>
-    <ul>
-        {% for player in players %}
-        <li>{{ player[0] }} -- Balance: {{ player[1] }}</li>
+    {% if username %}
+        <table>
+
+            <!--
+                
+                This section displays the current user's name and
+                balance and option to update balance
+
+            -->
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Balance</th>
+                    <th scope="col">Update Balance</th>
+                </tr>
+                <tr>
+                    <th scope="row">{{ username }}</th>
+                    <td>{{ balance }}</td>
+                    <td><form method="post" action="/update_balance"><input type="number" name="balance" required>
+                            <button type="submit">Update</button>
+                    </form>
+                    </td>
+                </tr>
+            </table>
+            
+            <table>
+                <!--   
+                    This section displays all other players in 
+                    the database and their respective balances and
+                    the option to steal from them
+                -->
+
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Balance</th>
+                        <th scope="col">Steal</th>
+                    </tr>
+
+                    {% for player in players if player[0] != username %}
+
+                    <tr>
+                        <th scope="row">{{ player[0] }}</th>
+                        <td> {{ player[1] }}</td>
+                        <td><form method="post" action="/steal_money"><input type="hidden" name="steal" value="{{ player[0] }}">
+                                <button type="submit">Steal</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+            </table>
+
+            <a href="/userPage" class="button">Dashboard</a>
+
+    {% else %}
+
+        <!--    
+                In the case a user is not logged in
+                all options will be displayed
+        -->
+
+        <table>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Balance</th>
+                <th scope="col">Update Balance</th>
+                <th scope="col">Steal</th>
+                <th scope="col">Delete Player</th>
+            </tr>
+
+            <p>
+
+            </p>
+            {% for player in players %}
+                
+                <tr>
+                    <th scope="row">{{ player[0] }}</th>
+                    <td>{{ player[1] }}</td>
+                    <td><form method="post" action="/update_balance">
+                        <input type="hidden" name="playerName" value="{{ player[0] }}">
+                        <input type="number" name="balance" required>
+                        <button type="submit">Update</button>
+                    </form>
+                    </td>
+                    <td><form method="post" action="/steal_money">
+                        <input type="hidden" name="stealerName" value="{{ player[0] }}">
+                        <select name="targetName">
+                            {% for target in players %}
+                                {%if target[0] != player[0] %}
+                                    <option value="{{ target[0] }}">{{ target[0] }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                        </select>
+                        <button type="submit">Steal</button>
+                    </form>
+                    </td>
+                    <td>
+                    <form method="post" action="/remove_player"><input type="hidden" name="remove" value="{{ player[0] }}">
+                            <button type="submit">Delete</button>
+                    </form>
+                    </td>
+                </tr>
         {% endfor %}
-    </ul>
+        </table>
+        <p></p>
+        <a href="/" class="button">Home</a>
+    {% endif %}
 </body>
 </html>
