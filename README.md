@@ -1,6 +1,6 @@
 # Flask Bank Game
 
-A browser-based bank game built with Python and Flask. This project evolved from a JSON-based CLI app, to a SQLite-backed CLI app, and finally into a full web application — still powered by SQLite but now accessible through the browser.
+A browser-based bank game built with Python and Flask. This project evolved from a JSON-based CLI app, to a SQLite-backed CLI app, and finally into a full web application — still powered by SQLite but now accessible through the browser!
 
 ## What it does
 
