@@ -2,3 +2,6 @@
 __pycache__/
 *.pyc
 players.db
+venv/
+.venv/
+*.db
