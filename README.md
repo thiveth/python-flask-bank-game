@@ -8,8 +8,8 @@ A web based bank game built with Python and Flask. This project evolved from a J
 - Attempt to steal money from other players (outcome is probability based)
 - Update player balances
 - Delete players from the database
-- Session-based authentication — log in as a player to interact as them
-- Two different views depending on whether you are logged in or not
+- Session-based authentication (log in as a player to interact as them)
+- Play in third person or first person depending on your login state
 
 ## What I learned
 
